@@ -37,12 +37,15 @@ button:hover {
 
 .imgcontainer {
   text-align: center;
-  margin: 24px 0 12px 0;
+  width: 1000px;
+  {#margin: 5px 0 5px 0;#}
+  height: auto;
 }
 
 img.avatar {
-  width: 40%;
-  border-radius: 50%;
+  width: 250px;
+    height: auto;
+    text-align: -webkit-match-parent;
 }
 
 .container {
@@ -69,15 +72,28 @@ span.psw {
 <body>
 <form action="/" method="post">
   <div class="imgcontainer">
-    <img src="password-manager.jpg" alt="Avatar" class="avatar">
+    <img src="../static/pics/password-manager.jpg" alt="Avatar" class="avatar">
   </div>
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <h style="color:#f44336;">{{ message }}</h>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
   <div class="container">
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>
 
     <label for="psw"><b>Master_Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="psw" id ="input" required>
+    <label>
+        <input type="checkbox" onclick="show_pass()"> Show Password
+    </label>
+    </label>
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
@@ -89,5 +105,15 @@ span.psw {
     <button type="button" class="cancelbtn">Cancel</button>
   </div>
 </form>
+<script>
+function show_pass() {
+  var x = document.getElementById("input");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 </body>
 </html>
