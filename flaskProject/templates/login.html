@@ -38,7 +38,7 @@ button:hover {
 .imgcontainer {
   text-align: center;
   width: 1000px;
-  {#margin: 5px 0 5px 0;#}
+  margin: 5px 0 5px 0;
   height: auto;
 }
 
@@ -78,7 +78,7 @@ span.psw {
   {% if messages %}
     <ul class=flashes>
     {% for message in messages %}
-      <h style="color:#f44336;">{{ message }}</h>
+      <h style="color:#af0808;">{{ message }}</h>
     {% endfor %}
     </ul>
   {% endif %}
@@ -86,7 +86,7 @@ span.psw {
 {% block body %}{% endblock %}
   <div class="container">
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
     <label for="psw"><b>Master_Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" id ="input" required>
@@ -113,6 +113,11 @@ function show_pass() {
   } else {
     x.type = "password";
   }
+}
+</script>
+<script>
+window.onload = function() {
+  document.getElementById("email").focus();
 }
 </script>
 </body>
