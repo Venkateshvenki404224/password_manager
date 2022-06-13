@@ -35,3 +35,9 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+
+@views.route('/addpass', methods=['GET', 'POST'])
+@login_required
+def addpass():
+    return render_template("addpass.html", user=current_user)
