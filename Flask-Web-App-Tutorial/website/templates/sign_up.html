@@ -29,6 +29,8 @@ content %}
       class="form-control"
       id="password1"
       name="password1"
+      data-toggle="password"
+      data-placement="before"
       placeholder="Enter password"
     />
   </div>
@@ -39,12 +41,11 @@ content %}
       class="form-control"
       id="password2"
       name="password2"
+      data-toggle="password"
+      data-placement="before"
       placeholder="Confirm password"
     />
   </div>
-  <label>
-        <input type="checkbox" class="btn btn-primary" onclick="show_pass()"> Show Password
-    </label>
   <br />
   <button type="button" class="btn btn-primary" onclick="genPassword()">Generate</button>
   <button type="submit" class="btn btn-primary">Submit</button>
