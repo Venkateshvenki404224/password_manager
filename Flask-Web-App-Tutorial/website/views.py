@@ -2,15 +2,15 @@ from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
-from .models import PassList,List
+from .models import PassList
 import json
 
 views = Blueprint('views', __name__)
 
 
-@views.route('/', methods=['GET', 'POST'])
+@views.route('/notes', methods=['GET', 'POST'])
 @login_required
-def home():
+def notes():
     if request.method == 'POST':
         note = request.form.get('note')
 
@@ -22,7 +22,7 @@ def home():
             db.session.commit()
             flash('Note added!', category='success')
 
-    return render_template("home.html", user=current_user)
+    return render_template("Notes.html", user=current_user)
 
 
 @views.route('/delete-note', methods=['POST'])
@@ -59,14 +59,12 @@ def addpass():
     return render_template("addpass.html", user=current_user)
 
 
-# @views.route('/')
-# @login_required
-# def home():
-#     try:
-#         password = List.query.filter_by(style='mini').order_by(List.name).all()
-#
-#
-#     except Exception as e:
-#         error = "<p> The error:<br>"+ str(e) + "</p>"
-#         flash("Something went wrong",category='error')
-#         return error
+@views.route('/')
+@login_required
+def home():
+    return render_template("home.html",user=current_user)
+
+@views.route('/check')
+@login_required
+def check():
+        return render_template("check.html",user=current_user)

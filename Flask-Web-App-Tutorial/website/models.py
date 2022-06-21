@@ -13,7 +13,7 @@ class Note(db.Model):
 class PassList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     website = db.Column(db.String(150))
-    email = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(150))
     password = db.Column(db.String(150))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
@@ -25,11 +25,3 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note')
     pass_list = db.relationship('PassList')
-
-class List(db.Model):
-    __tablename__ = 'passlist'
-    id = db.Column(db.Integer, primary_key=True)
-    website = db.Column(db.String)
-    email = db.Column(db.String)
-    password = db.Column(db.String)
-    user_id = db.Column(db.Integer)
