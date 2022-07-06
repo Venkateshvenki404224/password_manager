@@ -1,47 +1,37 @@
 {% extends "base.html" %} {% block title %}Add Password{% endblock %} {% block content
 %}
 <form method="POST">
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="check_pass">Password</a>
-  </li>
-    </ul>
-  <div class="form-group">
-    <label for="text">Enter your Email Address</label>
-    <input
-      type="text"
-      class="form-control"
-      id="url"
-      name="url"
-      placeholder="Website Url"
-    />
-  </div>
+    <br>
   <div class="form-group">
     <label for="username">Username</label>
+      <br>
     <input
       type="text"
       class="form-control"
       id="username"
       name="username"
-      placeholder="Username"
+      placeholder="Enter your Username!"
     />
   </div>
-  <div class="form-group">
-    <label for="password">Password</label>
+  <br>
+    <div>
+  <button type="submit" class="btn btn-primary">Check</button>
+    </div>
+    <br />
+    <div class="form-group">
+    <label for="username">Password</label>
+      <br>
     <input
       type="password"
       class="form-control"
-      id="psw"
-      name="psw"
-      data-toggle="password"
-      data-placement="before"
-      placeholder="Enter password"
+      id="password"
+      name="password"
+      placeholder="Enter your Password!"
     />
   </div>
-  <br />
+  <br>
     <div>
-  <button type="button" class="btn btn-primary" onclick="Password()">Generate</button>
-  <button type="submit" class="btn btn-primary">Add</button>
-        </div>
+  <button type="submit" class="btn btn-primary">Check</button>
+    </div>
 </form>
 {% endblock %}
