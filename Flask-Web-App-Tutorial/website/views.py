@@ -4,6 +4,8 @@ from .models import Note
 from . import db
 from .models import PassList
 import json
+import requests
+import hashlib
 
 views = Blueprint('views', __name__)
 
@@ -41,30 +43,75 @@ def delete_note():
 @views.route('/addpass', methods=['GET', 'POST'])
 @login_required
 def addpass():
-    if request.method=="POST":
+    if request.method == "POST":
         web = request.form.get('url')
         name = request.form.get('username')
         password = request.form.get('psw')
-
-        if len(name)< 4:
+        if len(web) < 2:
+            flash('The Name Of The Website Too Short!.', category='error')
+        elif len(name) < 4:
             flash('Enter a valid email id.', category='error')
         elif len(password) < 8:
             flash('Password must be at least 8 characters.', category='error')
         else:
-            pass_list = PassList(email=name,website=web,password=password,user_id=current_user.id)
+            pass_list = PassList(email=name, website=web, password=password, user_id=current_user.id)
             db.session.add(pass_list)
             db.session.commit()
-            flash('Password Added!',category='success')
+            flash('Password Added!', category='success')
 
-    return render_template("addpass.html", user=current_user)
+        return render_template("addpass.html", user=current_user)
 
 
 @views.route('/')
 @login_required
 def home():
-    return render_template("home.html",user=current_user)
+    return render_template("home.html", user=current_user)
 
-@views.route('/check')
+
+@views.route('/check', methods=['GET', 'POST'])
 @login_required
 def check():
-        return render_template("check.html",user=current_user)
+    if request.method == "POST":
+        password = request.form.get('password')
+        password1 = password.encode()
+        sha_password = hashlib.sha1(password1).hexdigest()
+        sha_prefix = sha_password[0:5]
+        sha_postfix = sha_password[5:].upper()
+        url = "https://api.pwnedpasswords.com/range/" + sha_prefix
+        payload = {}
+        headers = {}
+        responce = requests.request("GET", url, headers=headers, data=payload)
+        pwnd_dict = {}
+        pwnd_list = responce.text.split("\r\n")
+        for pwnd_pass in pwnd_list:
+            pwnd_hash = pwnd_pass.split(":")
+            pwnd_dict[pwnd_hash[0]] = pwnd_hash[1]
+
+        if sha_postfix in pwnd_dict.keys():
+            flash(f"Your password have been found {pwnd_dict[sha_postfix]} times", category='error')
+        else:
+            flash("You password is safe!", category='success')
+    return render_template("check.html", user=current_user)
+
+@views.route('/update', methods=['GET', 'POST'])
+@login_required
+def update():
+    if request.method == 'POST':
+        data = PassList.query.get(request.form.get('id'))
+
+        data.website = request.form['website']
+        data.email = request.form['email']
+        data.password = request.form['password']
+        db.session.commit()
+        flash("Data Modified Successfully",category='success')
+        return render_template("home.html",user=current_user)
+
+@views.route('/delete', methods=['GET', 'POST'])
+@login_required
+def delete(id):
+    data = PassList.query.get(id)
+    db.session.delete(data)
+    db.session.commit()
+    flash("Data deleted",category='success')
+    return render_template("home.html",user=current_user)
+
