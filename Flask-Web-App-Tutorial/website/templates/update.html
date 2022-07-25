@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Update{% endblock %} {% block content
+%}
+<div class="row">
+  <div class="col-md-4offset-md-4">
+    <div class="card card-body">
+      <form action="/update/{{user.pass_list.id}}" method="POST">
+         <div class="form-group">
+           <input type="text" name="Website" value="{{user.pass_list.website}}" class="form-control">
+         </div>
+         <div class="form-group">
+           <input type="text" name="Email" value="{{user.pass_list.email}}" class="form-control">
+         </div>
+         <div class="form-group">
+           <input type="text" name="Password" value="{{user.pass_list.password}}" class="form-control">
+         </div>
+         <div class="form-group">
+             <button type="submit" class="btn btn-primary btn-block">
+                 Update
+             </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

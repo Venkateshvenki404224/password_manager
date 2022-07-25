@@ -43,7 +43,7 @@ def delete_note():
 @views.route('/addpass', methods=['GET', 'POST'])
 @login_required
 def addpass():
-    if request.method == "POST":
+    if request.method=="POST":
         web = request.form.get('url')
         name = request.form.get('username')
         password = request.form.get('psw')
@@ -54,13 +54,12 @@ def addpass():
         elif len(password) < 8:
             flash('Password must be at least 8 characters.', category='error')
         else:
-            pass_list = PassList(email=name, website=web, password=password, user_id=current_user.id)
+            pass_list = PassList(email=name,website=web,password=password,user_id=current_user.id)
             db.session.add(pass_list)
             db.session.commit()
             flash('Password Added!', category='success')
 
-        return render_template("addpass.html", user=current_user)
-
+    return render_template("addpass.html", user=current_user)
 
 @views.route('/')
 @login_required
@@ -93,24 +92,19 @@ def check():
             flash("You password is safe!", category='success')
     return render_template("check.html", user=current_user)
 
-@views.route('/update', methods=['GET', 'POST'])
+@views.route('/update/<id>', methods=['GET', 'POST'])
 @login_required
-def update():
+def update(id):
     if request.method == 'POST':
-        data = PassList.query.get(request.form.get('id'))
-
-        data.website = request.form['website']
-        data.email = request.form['email']
-        data.password = request.form['password']
-        db.session.commit()
-        flash("Data Modified Successfully",category='success')
-        return render_template("home.html",user=current_user)
+        data = PassList.query.get(request.form.get('1'))
+        print(data)
+    return render_template("update.html",user=current_user)
 
 @views.route('/delete', methods=['GET', 'POST'])
 @login_required
 def delete(id):
-    data = PassList.query.get(id)
-    db.session.delete(data)
+    data4 = PassList.query.get(id)
+    db.session.delete(data4)
     db.session.commit()
     flash("Data deleted",category='success')
     return render_template("home.html",user=current_user)
