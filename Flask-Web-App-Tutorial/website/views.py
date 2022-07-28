@@ -92,20 +92,24 @@ def check():
             flash("You password is safe!", category='success')
     return render_template("check.html", user=current_user)
 
-@views.route('/update/<id>', methods=['GET', 'POST'])
+@views.route('/update', methods=['POST'])
 @login_required
-def update(id):
-    if request.method == 'POST':
-        data = PassList.query.get(request.form.get('1'))
-        print(data)
-    return render_template("update.html",user=current_user)
+def update():
+    return render_template("check.html", user=current_user)
 
-@views.route('/delete', methods=['GET', 'POST'])
+
+@views.route('/delete', methods=['POST'])
 @login_required
-def delete(id):
-    data4 = PassList.query.get(id)
-    db.session.delete(data4)
-    db.session.commit()
-    flash("Data deleted",category='success')
-    return render_template("home.html",user=current_user)
+def delete():
+    password = json.loads(request.data)
+    passId = password['passId']
+    password = PassList.query.get(passId)
+    if password:
+        if password.user_id == current_user.id:
+            db.session.delete(password)
+            db.session.commit()
+
+    return jsonify({})
+
+
 
