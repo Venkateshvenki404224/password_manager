@@ -1,22 +1,24 @@
 {% extends "base.html" %} {% block title %}Add Password{% endblock %} {% block content
 %}
-<form method="POST">
-    <br />
-    <div class="form-group">
-    <label for="password">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password"
-      name="password"
-      data-toggle="password"
-      data-placement="before"
-      placeholder="Enter password"
-    />
-  </div>
-  <br>
-    <div>
-  <button type="submit" class="btn btn-primary" onclick="check()">Check</button>
-    </div>
-</form>
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form method="POST">
+        <br />
+        <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          data-toggle="password"
+          data-placement="before"
+          placeholder="Enter password"
+        />
+      </div>
+      <br>
+        <div>
+      <button type="submit" class="btn btn-primary" onclick="check()">Check</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

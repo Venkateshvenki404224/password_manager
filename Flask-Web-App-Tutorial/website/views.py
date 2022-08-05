@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Note
+from .models import Note, User
 from . import db
 from .models import PassList
 import json
@@ -43,7 +43,7 @@ def delete_note():
 @views.route('/addpass', methods=['GET', 'POST'])
 @login_required
 def addpass():
-    if request.method=="POST":
+    if request.method == "POST":
         web = request.form.get('url')
         name = request.form.get('username')
         password = request.form.get('psw')
@@ -54,12 +54,14 @@ def addpass():
         elif len(password) < 8:
             flash('Password must be at least 8 characters.', category='error')
         else:
-            pass_list = PassList(email=name,website=web,password=password,user_id=current_user.id)
+            pass_list = PassList(email=name, website=web, password=password, user_id=current_user.id)
             db.session.add(pass_list)
             db.session.commit()
             flash('Password Added!', category='success')
+            return render_template("home.html",user=current_user)
 
     return render_template("addpass.html", user=current_user)
+
 
 @views.route('/')
 @login_required
@@ -92,10 +94,23 @@ def check():
             flash("You password is safe!", category='success')
     return render_template("check.html", user=current_user)
 
-@views.route('/update', methods=['POST'])
+
+@views.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
-def update():
-    return render_template("check.html", user=current_user)
+def update(id):
+    name_to_update = PassList.query.get_or_404(id)
+    if request.method == "POST":
+        name_to_update.website = request.form['website']
+        name_to_update.email = request.form['email']
+        try:
+            db.session.commit()
+            flash("Data Edited", category='success')
+            return render_template("home.html", user=current_user, name_to_update=name_to_update)
+        except:
+            flash("Error! ")
+            return render_template('update.html', name_to_update=name_to_update, user=current_user)
+    else:
+        return render_template("update.html", name_to_update=name_to_update, user=current_user)
 
 
 @views.route('/delete', methods=['POST'])
@@ -104,6 +119,7 @@ def delete():
     password = json.loads(request.data)
     passId = password['passId']
     password = PassList.query.get(passId)
+    print(password)
     if password:
         if password.user_id == current_user.id:
             db.session.delete(password)
@@ -112,4 +128,16 @@ def delete():
     return jsonify({})
 
 
+@views.route('/admin', methods=['GET', 'POST'])
+@login_required
+def delete_user():
+    all_data = User.query.all()
+    # db.session.delete(all_data)
+    # db.session.commit()
+    # flash("Deleted User",category='success')
+    return render_template("admin.html", user=current_user, users=all_data)
 
+
+@views.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404

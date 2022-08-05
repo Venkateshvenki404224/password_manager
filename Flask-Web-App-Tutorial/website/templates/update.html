@@ -1,24 +1,49 @@
 {% extends "base.html" %} {% block title %}Update{% endblock %} {% block content
 %}
-<div class="row">
-  <div class="col-md-4offset-md-4">
-    <div class="card card-body">
-      <form action="/update/{{user.pass_list.id}}" method="POST">
-         <div class="form-group">
-           <input type="text" name="Website" value="{{user.pass_list.website}}" class="form-control">
-         </div>
-         <div class="form-group">
-           <input type="text" name="Email" value="{{user.pass_list.email}}" class="form-control">
-         </div>
-         <div class="form-group">
-           <input type="text" name="Password" value="{{user.pass_list.password}}" class="form-control">
-         </div>
-         <div class="form-group">
-             <button type="submit" class="btn btn-primary btn-block">
-                 Update
-             </button>
-      </form>
-    </div>
-  </div>
+
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form action="/update/{{ name_to_update.id }}" method="POST">
+      <h3 align="center">Update</h3>
+      <div class="form-group">
+        <label for="text">Website*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="website"
+          name="website"
+          placeholder="Website Url"
+          value="{{ name_to_update.website}}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Username"
+          value="{{ name_to_update.email }}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          data-toggle="password"
+          data-placement="before"
+          placeholder="Enter password"
+          value="{{ name_to_update.password }}"
+        />
+      </div>
+      <br />
+        <div>
+      <button type="button" class="btn btn-primary" onclick="Password()">Generate</button>
+      <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+    </form>
 </div>
 {% endblock %}
