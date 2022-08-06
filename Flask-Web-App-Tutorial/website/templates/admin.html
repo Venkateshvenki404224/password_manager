@@ -2,12 +2,12 @@
 %}
 <div class="body">
 		<table  class="table table-hover" style="width:100%">
-        <thead >
+       <thead class="table table-striped">
 			<tr>
-                <th>Sl no</th>
-				<th>Email</th>
-				<th>Password</th>
+                <th>User Id</th>
                 <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
 			</tr>
         </thead>
         <tbody>
@@ -16,11 +16,9 @@
 			<tr>
                 <td></td>
 				<td>{{ sock.email }}</td>
-				<td>{{ sock.password }}</td>
 				<td>{{ sock.first_name }}</td>
-                <td width="130">
-                    <a href="/update/{{ sock.id }}" class="btn btn-secondary btn-sm" onclick="onEdit(this)">Edit</a>
-                    <a href="/admin" class="btn btn-danger btn-delete btn-sm" >Delete</a>
+                <td width="200">
+                    <a href="/admin" class="btn btn-danger btn-delete btn-sm" >Remove</a>
                 </td>
 			</tr>
 			{% endfor %}

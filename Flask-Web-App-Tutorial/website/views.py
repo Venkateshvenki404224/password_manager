@@ -107,7 +107,7 @@ def update(id):
             flash("Data Edited", category='success')
             return render_template("home.html", user=current_user, name_to_update=name_to_update)
         except:
-            flash("Error! ")
+            flash("Error!",category='error')
             return render_template('update.html', name_to_update=name_to_update, user=current_user)
     else:
         return render_template("update.html", name_to_update=name_to_update, user=current_user)
@@ -139,5 +139,5 @@ def delete_user():
 
 
 @views.errorhandler(404)
-def page_not_found(e):
-    return render_template("404.html"), 404
+def internal_server_error(e):
+    return render_template('404.html'), 404
