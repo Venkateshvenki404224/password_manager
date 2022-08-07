@@ -1,8 +1,8 @@
 {% extends "base.html" %} {% block title %}Add Password{% endblock %} {% block content
 %}
+    <br><br/>
 <div class="shadow p-3 mb-5 bg-body rounded">
     <form method="POST">
-      <h3 align="center">Add New</h3>
       <div class="form-group">
         <label for="text">Website</label>
         <input
@@ -36,11 +36,13 @@
           placeholder="Enter password"
         />
       </div>
-      <br />
+      <br/>
         <div>
-      <button type="button" class="btn btn-primary" onclick="Password()">Generate</button>
-      <button type="submit" class="btn btn-primary">Add</button>
-            </div>
+          <a  class="btn btn-secondary" onclick="Password()">Generate</a>
+            <button  type="submit" class="btn btn-outline-dark btn-sm " id="edit" >Add</button>
+        </div>
     </form>
 </div>
+
+    <i> <a href="/" class="btn btn-outline-dark btn-sm fa fa-arrow-left" id="edit" >Back</a></i>
 {% endblock %}

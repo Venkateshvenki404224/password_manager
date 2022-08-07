@@ -1,0 +1,42 @@
+{#{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content#}
+{#%}#}
+{#<h1 align="center">SecureNotes</h1>#}
+{#<ul class="list-group list-group-flush" id="notes">#}
+{#  {% for note in user.notes %}#}
+{#  <li class="list-group-item">#}
+{#    {{ note.data }}#}
+{#    <button type="button" class="close" onClick="deleteNote({{ note.id }})">#}
+{#            <a href="/edit/{{note.id}}" class="btn btn-secondary btn-sm">Edit</a>#}
+{#      <span aria-hidden="true">&times;</span>#}
+{#    </button>#}
+{#  </li>#}
+{#  {% endfor %}#}
+{#</ul>#}
+{#<form method="POST">#}
+{#  <textarea name="note" id="note" class="form-control"></textarea>#}
+{#  <br />#}
+{#  <div align="center">#}
+{#    <button type="submit" class="btn btn-primary">Add Note</button>#}
+{#  </div>#}
+{#</form>#}
+{#{% endblock %}#}
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+    <br><br/>
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form method="POST">
+        <div class="mb-3 fw-bolder ">
+          <label for="exampleFormControlInput1" class="form-label">Title*</label>
+            <input type="text" class="form-control" id="title"  name="title" placeholder="Give Me a name ">
+        </div>
+        <div class="mb-3 fs-1">
+          <label for="exampleFormControlTextarea1" class="form-label">Type Your Notes Below</label>
+            <textarea class="form-control" name="note" id="note" rows="3"></textarea>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-outline-dark btn-lg">Add Note</button>
+            <a href="/notes" class="btn btn-outline-dark btn-sm" id="edit" >Back</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

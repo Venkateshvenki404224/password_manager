@@ -22,3 +22,25 @@ body td:first-child:before {
 #edit {
   margin-right: 10px;
 }
+#nav{
+  background-color: #2596be;
+
+}
+.link{
+  outline-color: #333333;
+}
+#add{
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 0px;
+  margin-right: 1100px;
+}
+#add {
+  font-family: "Times New Roman", Times, serif;
+}
+h1{
+  font-family: "Times New Roman", Times, serif;
+}
+#test1{
+  background-color: aqua;
+}
