@@ -2,7 +2,7 @@
 %}
     <br><br/>
 <div class="shadow p-3 mb-5 bg-body rounded">
-    <form action="/update/{{ name_to_update.id }}" method="POST">
+    <form action="/password/update/{{ name_to_update.id }}" method="POST">
       <div class="form-group">
         <label for="text">Website*</label>
         <input
@@ -45,5 +45,5 @@
             </div>
     </form>
 </div>
-    <i> <a href="/" class="btn btn-outline-dark btn-sm fa fa-arrow-left" id="edit" >Back</a></i>
+    <i> <a href="/password" class="btn btn-outline-dark btn-sm fa fa-arrow-left" id="edit" >Back</a></i>
 {% endblock %}

@@ -2,7 +2,7 @@
 content %}
 <div class="shadow p-3 mb-5 bg-body rounded" id="signup">
     <form method="POST">
-      <h3 align="center">Sign Up</h3>
+      <i class="fa-solid fa-user-plus fa-2xl " id="logo"></i>
       <div class="form-group">
         <label for="email">Email Address</label>
         <input
@@ -48,8 +48,8 @@ content %}
         />
       </div>
       <br />
-      <button type="button" class="btn btn-primary" onclick="genPassword()">Generate</button>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-outline-dark btn-lg" onclick="genPassword()">Generate</button>
+      <button type="submit" class="btn btn-outline-dark btn-lg">Submit</button>
     </form>
 </div>
 {% endblock %}

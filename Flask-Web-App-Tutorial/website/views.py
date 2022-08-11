@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify,redirect,url_for
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Note, User
 from . import db
@@ -7,13 +7,14 @@ import json
 import requests
 import hashlib
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, ValidationError, TextAreaField
+from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from wtforms.widgets import TextArea
 
-
 views = Blueprint('views', __name__)
 
+
+#Adding Notes
 
 @views.route('/add-notes', methods=['GET', 'POST'])
 @login_required
@@ -25,7 +26,7 @@ def add_notes():
         if len(note1) < 1:
             flash('Note is too short!', category='error')
         else:
-            new_note = Note(data=note1,title=title1,user_id=current_user.id)
+            new_note = Note(data=note1, title=title1, user_id=current_user.id)
             db.session.add(new_note)
             db.session.commit()
             flash('Note added!', category='success')
@@ -33,51 +34,66 @@ def add_notes():
             return render_template("notes.html", notes=notes, user=current_user)
     return render_template("add_note.html", user=current_user)
 
+
+#Displaying the notes
+
 @views.route('/notes', methods=['GET', 'POST'])
 @login_required
 def notes():
     notes = Note.query.order_by(Note.date)
-    return render_template("notes.html",notes=notes,user=current_user)
+    return render_template("notes.html", notes=notes, user=current_user)
 
 
-@views.route('/notes/<int:id>',methods=['GET','POST'])
+
+#Displaying Single Notes in a page
+
+@views.route('/notes/<int:id>', methods=['GET', 'POST'])
 @login_required
 def note(id):
     note_id = Note.query.get_or_404(id)
-    return render_template('note.html',note_id=note_id,user=current_user)
+    return render_template('note.html', note_id=note_id, user=current_user)
 
-@views.route('/notes/edit/<int:id>',methods=['GET','POST'])
+
+
+#Editing the Notes
+
+@views.route('/notes/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_note(id):
-    form =  PostForm()
+    form = PostForm()
     note_id = Note.query.get_or_404(id)
     if form.validate_on_submit():
         note_id.title = form.title.data
         note_id.data = form.data.data
         db.session.add(note_id)
         db.session.commit()
-        flash("Data Updated",category='success')
-        return redirect(url_for('views.note',id=note_id.id))
+        flash("Data Updated", category='success')
+        return redirect(url_for('views.note', id=note_id.id))
     form.title.data = note_id.title
     form.data.data = note_id.data
-    return  render_template('edit_note.html',form=form,user=current_user)
+    return render_template('edit_note.html', form=form, user=current_user)
 
 
-@views.route('/notes/delete/<int:id>',methods=['GET','POST'])
+
+#Deleting the Notes
+
+@views.route('/notes/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_note(id):
     note_id = Note.query.get_or_404(id)
     try:
         db.session.delete(note_id)
         db.session.commit()
-        flash("Notes Deleted Succefully",category='success')
+        flash("Notes Deleted Succefully", category='success')
         notes = Note.query.order_by(Note.date)
-        return render_template("notes.html",notes=notes,user=current_user)
+        return render_template("notes.html", notes=notes, user=current_user)
     except:
-        flash("Their was an Problem deleting",category='error')
+        flash("Their was an Problem deleting", category='error')
         notes = Note.query.order_by(Note.date)
         return render_template("notes.html", notes=notes, user=current_user)
 
+
+#Adding Password
 
 @views.route('/addpass', methods=['GET', 'POST'])
 @login_required
@@ -98,15 +114,62 @@ def addpass():
             db.session.commit()
             flash('Password Added!', category='success')
             passlist1 = PassList.query.order_by(PassList.date)
-            return render_template("home.html",user=current_user,passlist1=passlist1)
+            return redirect(url_for('views.password'))
     return render_template("addpass.html", user=current_user)
 
 
-@views.route('/')
-@login_required
-def home():
-    return render_template("home.html", user=current_user)
+#Displaying the Passwords
 
+@views.route('/password')
+@login_required
+def password():
+    Password = PassList.query.order_by(PassList.date)
+    return render_template("password.html", user=current_user,Password=Password)
+
+
+#Updating the Passwords
+
+@views.route('/password/update/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update(id):
+    name_to_update = PassList.query.get_or_404(id)
+    if request.method == "POST":
+        name_to_update.website = request.form['website']
+        name_to_update.email = request.form['email']
+        name_to_update.password = request.form['password']
+        try:
+            # db.session.add(name_to_update)
+            db.session.commit()
+            flash("Data Edited", category='success')
+            return redirect(url_for('views.password'))
+        except:
+            flash("Error!", category='error')
+            return render_template('update.html', name_to_update=name_to_update, user=current_user)
+    else:
+        return render_template("update.html", name_to_update=name_to_update, user=current_user)
+
+
+
+#Deleting PassWords
+
+@views.route('/password/delete/<int:id>',methods=['GET','POST'])
+@login_required
+def delete_password(id):
+    password_id = PassList.query.get_or_404(id)
+    try:
+        db.session.delete(password_id)
+        db.session.commit()
+        flash("Password Deleted Succefully", category='success')
+        Password = PassList.query.order_by(PassList.date)
+        return redirect(url_for('views.password'))
+    except:
+        flash("Their was an Problem deleting", category='error')
+        Password = PassList.query.order_by(PassList.date)
+        return redirect(url_for('views.password'))
+
+
+
+#Checking the Passwords
 
 @views.route('/check', methods=['GET', 'POST'])
 @login_required
@@ -134,42 +197,27 @@ def check():
     return render_template("check.html", user=current_user)
 
 
-@views.route('/update/<int:id>', methods=['GET', 'POST'])
-@login_required
-def update(id):
-    name_to_update = PassList.query.get_or_404(id)
-    if request.method == "POST":
-        name_to_update.website = request.form['website']
-        name_to_update.email = request.form['email']
-        try:
-            db.session.commit()
-            flash("Data Edited", category='success')
-            return render_template("home.html", user=current_user, name_to_update=name_to_update)
-        except:
-            flash("Error!",category='error')
-            return render_template('update.html', name_to_update=name_to_update, user=current_user)
-    else:
-        return render_template("update.html", name_to_update=name_to_update, user=current_user)
 
 
-@views.route('/delete', methods=['POST'])
-@login_required
-def delete():
-    password = json.loads(request.data)
-    passId = password['passId']
-    password = PassList.query.get(passId)
-    print(password)
-    if password:
-        if password.user_id == current_user.id:
-            db.session.delete(password)
-            db.session.commit()
 
-    return jsonify({})
+# @views.route('/delete', methods=['POST'])
+# @login_required
+# def delete():
+#     password = json.loads(request.data)
+#     passId = password['passId']
+#     password = PassList.query.get(passId)
+#     print(password)
+#     if password:
+#         if password.user_id == current_user.id:
+#             db.session.delete(password)
+#             db.session.commit()
+#
+#     return jsonify({})
 
 
 @views.route('/admin', methods=['GET', 'POST'])
 @login_required
-def delete_user():
+def admin():
     all_data = User.query.all()
     # db.session.delete(all_data)
     # db.session.commit()
@@ -181,11 +229,14 @@ def delete_user():
 def page_not_found(e):
     return render_template('404.html'), 404
 
-# @views.route('/',methods=['GET','POST'])
-# def index():
-    # return render_template('index.html')
+
+@views.route('/')
+def home():
+    all_data = User.query.all()
+    return render_template("home.html",user=current_user,users=all_data)
+
 
 class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
-    data = StringField("Data", validators=[DataRequired()],widget=TextArea())
+    data = StringField("Data", validators=[DataRequired()], widget=TextArea())
     submit = SubmitField("Submit")

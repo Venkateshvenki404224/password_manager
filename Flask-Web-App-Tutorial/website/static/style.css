@@ -44,3 +44,21 @@ h1{
 #test1{
   background-color: aqua;
 }
+#logo{
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 0px;
+  margin-right: 1100px;
+}
+.form-group{
+  font-family: "Times New Roman", Times, serif;
+  font-size: xx-large;
+}
+.form-control{
+  font-family: "Times New Roman", Times, serif;
+  font-size: large;
+}
+.table{
+  font-family: "Times New Roman", Times, serif;
+  font-size: large;
+}
