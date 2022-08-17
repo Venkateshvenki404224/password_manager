@@ -26,5 +26,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150), nullable=False)
     first_name = db.Column(db.String(150), nullable=False)
     date_added = db.Column(db.DateTime(timezone=True), default=func.now())
+    phone_no = db.Column(db.Integer, nullable=False, unique=True)
     notes = db.relationship('Note')
     pass_list = db.relationship('PassList')

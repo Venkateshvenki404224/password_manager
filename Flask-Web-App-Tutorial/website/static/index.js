@@ -40,3 +40,7 @@ function Password() {
         document.getElementById("psw").value = password;
  }
 
+
+$(document).ready(function () {
+    $('#employeeList').DataTable();
+});

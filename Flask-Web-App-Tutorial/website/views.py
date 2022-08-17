@@ -222,7 +222,7 @@ def admin():
     # db.session.delete(all_data)
     # db.session.commit()
     # flash("Deleted User",category='success')
-    return render_template("admin.html", user=current_user, users=all_data)
+    return render_template("test.html", user=current_user, users=all_data)
 
 
 @views.errorhandler(404)
@@ -231,6 +231,7 @@ def page_not_found(e):
 
 
 @views.route('/')
+@login_required
 def home():
     all_data = User.query.all()
     return render_template("home.html",user=current_user,users=all_data)

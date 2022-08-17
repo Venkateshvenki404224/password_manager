@@ -14,8 +14,11 @@
     <strong>Email:</strong>
     {{ user.email }}
     <br/>
+    <strong>Phone No:</strong>
+    {{ user.phone_no }}
+    <br/>
     <strong>Date joined:</strong>
-    {{ user.date_added }}</p>
+        {{ user.date_added }}</p>
     <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger btn-sm">Logout</a>
   </div>
 </div>
