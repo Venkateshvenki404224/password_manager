@@ -6,10 +6,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 
 auth = Blueprint('auth', __name__)
-TWILIO_ACCOUNT_SID = 'AC7b95626d9c0425256da8a60c0397b84f'
-TWILIO_AUTH_TOKEN = 'be22101c690a8362478dd5bd45a499ea'
 
-client = (TWILIO_ACCOUNT_SID,TWILIO_AUTH_TOKEN)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
