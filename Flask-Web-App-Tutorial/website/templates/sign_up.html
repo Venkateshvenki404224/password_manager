@@ -1,11 +1,10 @@
 {% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
 content %}
-<center>
-    <div class="shadow-lg p-3 mb-5 bg-body rounded" id="login">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded" id="sighup">
         <form method="POST">
           <i class="fa-solid fa-user-plus fa-2xl " id="logo"></i>
           <div class="form-group">
-            <label for="email">Email Address</label>
+            <strong><label for="email">Email Address</label></strong>
             <input
               type="email"
               class="form-control"
@@ -15,7 +14,7 @@ content %}
             />
           </div>
           <div class="form-group">
-            <label for="firstName">First Name</label>
+            <strong><label for="firstName">First Name</label></strong>
             <input
               type="text"
               class="form-control"
@@ -25,7 +24,7 @@ content %}
             />
           </div>
           <div class="form-group">
-            <label for="Phoneno">Phone No</label>
+            <strong><label for="Phoneno">Phone No</label></strong>
             <input
               type="number"
               class="form-control"
@@ -35,7 +34,7 @@ content %}
             />
           </div>
           <div class="form-group">
-            <label for="password1">Password</label>
+            <strong><label for="password1">Password</label></strong>
             <input
               type="password"
               class="form-control"
@@ -47,7 +46,7 @@ content %}
             />
           </div>
           <div class="form-group">
-            <label for="password2">Repeat Password</label>
+            <strong><label for="password2">Repeat Password</label></strong>
             <input
               type="password"
               class="form-control"
@@ -62,5 +61,4 @@ content %}
           <button type="submit" class="btn btn-outline-dark btn-ml">Submit</button>
         </form>
     </div>
-</center>
 {% endblock %}

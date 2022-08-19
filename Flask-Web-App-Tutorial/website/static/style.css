@@ -33,6 +33,7 @@ body td:first-child:before {
   margin-top: 20px;
   margin-left: 0px;
   margin-right: 1100px;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 #test1{
@@ -46,17 +47,8 @@ body td:first-child:before {
   margin-right: 1100px;
 }
 
-#login{
-  top: 20px;
-  width: 500px;
-  height: 500px;
 
-}
-.logo_center{
-  margin-left: 550px;
-  margin-right: 1000px;
-  border-left-width: 20px;
-}
+
 
 #title{
   background-color: #e5e5e3;
@@ -93,11 +85,11 @@ p{
 }
 
 #features{
-  padding: 7% 15%;
+  padding: 5% 10%;
 }
 .feature-box{
   text-align: center;
-  padding: 5%;
+  padding: 2%;
 }
 
 p{
@@ -117,4 +109,21 @@ p{
 }
 #contact_page{
   padding: 5%;
+}
+
+.logo_center{
+  text-align: center;
+  padding: 4%;
+}
+#sighup{
+  font-family: 'Ubuntu', sans-serif;
+  /*width: 60%;*/
+  /*height: 10%;*/
+  margin-top: 1%;
+  padding: 7% 15%;
+}
+
+#login{
+  width: 50%;
+  text-align: left;
 }
