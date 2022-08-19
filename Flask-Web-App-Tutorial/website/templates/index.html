@@ -1,75 +1,193 @@
-{#<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">#}
-{#  <div class="carousel-indicators">#}
-{#    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>#}
-{#    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>#}
-{#    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>#}
-{#  </div>#}
-{#  <div class="carousel-inner">#}
-{#    <div class="carousel-item active">#}
-{#      <img src="../static/register.svg" class="d-block w-100" alt="...">#}
-{#    </div>#}
-{#    <div class="carousel-item">#}
-{#      <img src="../static/wallpaperflare.com_wallpaper.jpg" class="d-block w-100" alt="...">#}
-{#    </div>#}
-{#    <div class="carousel-item">#}
-{#      <img src="../static/log.svg" class="d-block w-100" alt="...">#}
-{#    </div>#}
-{#  </div>#}
-{#  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">#}
-{#    <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
-{#    <span class="visually-hidden">Previous</span>#}
-{#  </button>#}
-{#  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">#}
-{#    <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
-{#    <span class="visually-hidden">Next</span>#}
-{#  </button>#}
-{#</div>#}
-{#<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">#}
-{#  <div class="carousel-indicators">#}
-{#    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>#}
-{#    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>#}
-{#    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>#}
-{#  </div>#}
-{#  <div class="carousel-inner">#}
-{#    <div class="carousel-item active" data-bs-interval="10000">#}
-{#      <img src="../static/log.svg" class="d-block w-100" alt="...">#}
-{#      <div class="carousel-caption d-none d-md-block">#}
-{#        <h5>First slide label</h5>#}
-{#        <p>Some representative placeholder content for the first slide.</p>#}
-{#      </div>#}
-{#    </div>#}
-{#    <div class="carousel-item" data-bs-interval="2000">#}
-{#      <img src="../static/wallpaperflare.com_wallpaper.jpg" class="d-block w-100" alt="...">#}
-{#      <div class="carousel-caption d-none d-md-block">#}
-{#        <h5>Second slide label</h5>#}
-{#        <p>Some representative placeholder content for the second slide.</p>#}
-{#      </div>#}
-{#    </div>#}
-{#    <div class="carousel-item">#}
-{#      <img src="../static/register.svg" class="d-block w-100" alt="...">#}
-{#      <div class="carousel-caption d-none d-md-block">#}
-{#        <h5>Third slide label</h5>#}
-{#        <p>Some representative placeholder content for the third slide.</p>#}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-{#  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">#}
-{#    <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
-{#    <span class="visually-hidden">Previous</span>#}
-{#  </button>#}
-{#  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">#}
-{#    <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
-{#    <span class="visually-hidden">Next</span>#}
-{#  </button>#}
-{#</div>#}
+<!DOCTYPE html>
+<html lang="">
 
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
+<head>
+  <meta charset="utf-8">
+  <title>Password Manager</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Ubuntu&display=swap" rel="stylesheet">
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link rel="stylesheet" href="../static/style.css">
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/26570ac4fc.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+
+  <section id="title">
+
+        <!-- Nav Bar -->
+        <nav class="navbar navbar-expand-lg  ">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Password Manager</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Contact Me</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/signup">Signup</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+
+
+
+
+        <!-- Title -->
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+              <h1>YOUR PASSWORD MANAGER AND MORE</h1>
+              <p>From passwords to personal info, Password Manager is the simple solution for protecting all your data. Get started today.</p>
+            </div>
+            <div class="col-lg-4">
+                <img src="../static/look.png" alt="iphone-mockup">
+            </div>
+        </div>
+      </div>
+  </section>
+
+
+  <!-- Features -->
+
+  <section id="features">
+    <div class="row">
+        <div class="feature-box col-lg-4">
+            <h3>Simplify your security</h3>
+            <p>Enjoy seamless deployment, simple password management, and customizable security settings like 2FA and single sign-on </p>
+        </div>
+        <div class="feature-box col-lg-4">
+            <h3>Generate random passwords</h3>
+            <p>Generate random passwords for each of your accounts. Password cracking programs are designed to guess the most common passwords first, so completely random passwords will always be far stronger than those you come up with off the top of your head.</p>
+        </div>
+        <div class="feature-box col-lg-4">
+            <h3>Store more than just passwords</h3>
+            <p>Answers to security questions, shopping profiles, memberships, and medical prescriptions are just a few examples of additional information that can be stored securely in your password safe.</p>
+        </div>
+    </div>
+  </section>
+
+
+  <!-- Testimonials -->
+
+  <section id="testimonials">
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-interval="2000">
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+                <h2>Technology freak , Intrested in Cyber security Finding friends related in the same field , to explore more in technology and cyber crime</h2>
+                <img class="about-page" src="../static/venki.jpeg" alt="Founder">
+                <em>Founder,Bengalore, India</em>
+              </div>
+              <div class="carousel-item active">
+                <h2>Technology freak , Intrested in Cyber security Finding friends related in the same field , to explore more in technology and cyber crime</h2>
+                <img class="about-page" src="../static/note.png" alt="Co-Founder">
+                <em>Co-Founder Bengalore, India</em>
+              </div>
+          </div>
+      </div>
+  </section>
+
+
+  <section id="contact_page">
+    <section class="mb-4">
+        <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+        <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+            a matter of hours to help you.</p>
+
+        <div class="row">
+            <div class="col-md-9 mb-md-0 mb-5">
+                <form id="contact-form" name="contact-form" action="#" method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                <label for="name" class="">Your name</label>
+                                <input type="text" id="name" name="name" class="form-control">
+                            </div>
+                        </div>
+                            <div class="col-md-6">
+                                <div class="md-form mb-0">
+                                    <label for="email" class="">Your email</label>
+                                    <input type="text" id="email" name="email" class="form-control">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="md-form mb-0">
+                                <label for="subject" class="">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <label for="message">Your message</label>
+                                <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                            </div>
+                        </div>
+                     </div>
+                </form>
+                    <div class="text-center text-md-left">
+                        <a class="btn btn-primary">Send</a>
+                    </div>
+                    <div class="status"></div>
+            </div>
+            <div class="col-md-3 text-center">
+                <ul class="list-unstyled mb-0">
+                    <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                        <p>Surana Collage South End Bangalore</p>
+                    </li>
+
+                    <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                        <p>+91 8073088890</p>
+                    </li>
+
+                    <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                        <p>allthingstech.tech</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+  </section>
+
+  <footer id="footer">
+
+    <p>© Copyright allthingstech.tech</p>
+
+  </footer>
+
+
+</body>
+
+</html>

@@ -7,11 +7,10 @@ body td:first-child:before {
   content: counter(serial-number);  /* Display the counter */
 }
 .btn {
-  /*margin-top: 10px;*/
   margin-right: 10px;
 }
 .body1{
-  background-color: #F9F2ED;
+  background-color: #ffffff;
 }
 #login{
   margin-top: 70px;
@@ -35,30 +34,87 @@ body td:first-child:before {
   margin-left: 0px;
   margin-right: 1100px;
 }
-#add {
-  font-family: "Times New Roman", Times, serif;
-}
-h1{
-  font-family: "Times New Roman", Times, serif;
-}
+
 #test1{
   background-color: aqua;
 }
+
 #logo{
   margin-bottom: 20px;
   margin-top: 20px;
   margin-left: 0px;
   margin-right: 1100px;
 }
-.form-group{
-  font-family: "Times New Roman", Times, serif;
-  font-size: xx-large;
+
+#login{
+  top: 20px;
+  width: 500px;
+  height: 500px;
+
 }
-.form-control{
-  font-family: "Times New Roman", Times, serif;
-  font-size: large;
+.logo_center{
+  margin-left: 550px;
+  margin-right: 1000px;
+  border-left-width: 20px;
 }
-.table{
-  font-family: "Times New Roman", Times, serif;
-  font-size: large;
+
+#title{
+  background-color: #e5e5e3;
+}
+
+h1{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  line-height:1.5;
+  font-weight: bold;
+}
+
+p{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.container-fluid{
+  padding: 3% 5%;
+}
+
+.navbar-brand{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 2rem;
+
+}
+
+.nav-item{
+  padding: 0 18px;
+}
+
+.nav-link{
+  font-size: 1.3rem;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+#features{
+  padding: 7% 15%;
+}
+.feature-box{
+  text-align: center;
+  padding: 5%;
+}
+
+p{
+  color: #8f8f8f;
+}
+
+#testimonials{
+  background-color: #e5e5e3;
+  text-align: center;
+  padding: 4%;
+}
+
+.about-page{
+  width: 9%;
+  border-radius: 100%;
+  margin: 20px;
+}
+#contact_page{
+  padding: 5%;
 }

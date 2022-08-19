@@ -44,3 +44,4 @@ function Password() {
 $(document).ready(function () {
     $('#employeeList').DataTable();
 });
+

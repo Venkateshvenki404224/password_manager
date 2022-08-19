@@ -1,10 +1,11 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
 %}
-<div class="shadow p-3 mb-5 bg-body rounded" id="login">
-    <center><i class="fa-solid fa-arrow-right-to-bracket fa-2xl " id="logo"></i></center>
+<center>
+    <div class="shadow-lg p-3 mb-5 bg-body rounded" id="login">
+    <i class="fa-solid fa-arrow-right-to-bracket fa-2xl " id="logo"></i>
     <form method="POST">
-      <div class="form-group">
-        <label for="email">Email Address</label>
+      <div class="container">
+        <strong><label for="email" class="form-label">Email Address</label></strong>
         <input
           type="email"
           class="form-control"
@@ -13,8 +14,8 @@
           placeholder="name@example.com"
         />
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
+      <div class="container ">
+        <strong><label for="password">Password</label></strong>
         <input
           type="password"
           class="form-control"
@@ -26,7 +27,11 @@
           />
       </div>
       <br />
-      <button type="submit" class="btn btn-outline-dark btn-lg">Login</button>
+      <button type="submit" class="btn btn-outline-dark btn-ml">Login</button>
     </form>
-</div>
+    <br><br/>
+    <p> Need an account? <a href="/signup">Sign Up</a></p>
+    </div>
+</center>
+
 {% endblock %}

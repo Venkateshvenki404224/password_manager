@@ -3,7 +3,6 @@ from flask_login import login_required, current_user
 from .models import Note, User
 from . import db
 from .models import PassList
-import json
 import requests
 import hashlib
 from flask_wtf import FlaskForm
@@ -222,7 +221,7 @@ def admin():
     # db.session.delete(all_data)
     # db.session.commit()
     # flash("Deleted User",category='success')
-    return render_template("test.html", user=current_user, users=all_data)
+    return render_template("index.html", user=current_user, users=all_data)
 
 
 @views.errorhandler(404)
@@ -230,7 +229,7 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
-@views.route('/')
+@views.route('/home')
 @login_required
 def home():
     all_data = User.query.all()
