@@ -1,11 +1,18 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for,session
+from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
-
+from twilio.rest import Client, TwilioException
+from dotenv import load_dotenv
+import os
+from .config import account_sid,auth_token,TWILIO_VERIFY_SERVICE_ID
 
 auth = Blueprint('auth', __name__)
+sid = account_sid
+authtoken = auth_token
+service_id = TWILIO_VERIFY_SERVICE_ID
+client = Client(sid, authtoken)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -16,7 +23,11 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
+                if user.two_factor_enabled():
+                    get_otp(user.phone_no)
+                    session['username'] = user.email
+                    session['phone'] = user.phone_no
+                    return redirect(url_for('views.verify_2fa'))
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
@@ -25,6 +36,7 @@ def login():
             flash('Email does not exist.', category='error')
 
     return render_template("login.html", user=current_user)
+
 
 @auth.route('/', methods=['GET', 'POST'])
 def index():
@@ -46,8 +58,6 @@ def sign_up():
         first_name = request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
-        phone_no = request.form.get('phone_no')
-
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
@@ -59,15 +69,39 @@ def sign_up():
             flash('Passwords don\'t match.', category='error')
         elif len(password1) < 8:
             flash('Password must be at least 8 characters.', category='error')
-        elif len(phone_no) < 10:
-            flash('Enter a valid number',category='error')
         else:
-            new_user = User(email=email, first_name=first_name,phone_no=phone_no, password=generate_password_hash(
+            new_user = User(email=email, first_name=first_name, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('views.home'))
-
     return render_template("sign_up.html", user=current_user)
+
+
+def get_otp(phone):
+    try:
+        verification = client.verify \
+            .v2 \
+            .services(service_id) \
+            .verifications \
+            .create(to=phone, channel='sms')
+    except TwilioException:
+        verification = client.verify \
+            .v2 \
+            .services(service_id) \
+            .verifications \
+            .create(to=phone, channel='call')
+
+
+def check_otp(phone, token):
+    try:
+        verification_check = client.verify \
+            .v2 \
+            .services(service_id) \
+            .verification_checks \
+            .create(to=phone, code=token)
+    except TwilioException:
+        return False
+    return verification_check.status == 'approved'
