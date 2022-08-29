@@ -184,7 +184,7 @@ def check():
         pwnd_list = responce.text.split("\r\n")
         for pwnd_pass in pwnd_list:
             pwnd_hash = pwnd_pass.split(":")
-            pwnd_dict[pwnd_hash[0]] = pwnd_hash[1]
+            pwnd_dict[pwnd_hash[0]] = pwnd_hash[2]
 
         if sha_postfix in pwnd_dict.keys():
             flash(f"Your password have been found {pwnd_dict[sha_postfix]} times", category='error')
