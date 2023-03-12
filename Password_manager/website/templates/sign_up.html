@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
+content %}
+    <div class="shadow-lg p-3 mb-5 bg-body rounded" id="sighup">
+        <form method="POST">
+          <i class="fa-solid fa-user-plus fa-2xl " id="logo"></i>
+          <div class="form-group">
+            <strong><label for="email">Email Address</label></strong>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div class="form-group">
+            <strong><label for="firstName">First Name</label></strong>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              name="firstName"
+              placeholder="Enter first name"
+            />
+          </div>
+          <div class="form-group">
+            <strong><label for="password1">Password</label></strong>
+            <input
+              type="password"
+              class="form-control"
+              id="password1"
+              name="password1"
+              data-toggle="password"
+              data-placement="before"
+              placeholder="********"
+            />
+          </div>
+          <div class="form-group">
+            <strong><label for="password2">Repeat Password</label></strong>
+            <input
+              type="password"
+              class="form-control"
+              id="password2"
+              name="password2"
+              data-toggle="password"
+              data-placement="before"
+              placeholder="********"
+            />
+          </div>
+          <br />
+          <button type="submit" class="btn btn-outline-dark btn-ml">Submit</button>
+        </form>
+    </div>
+{% endblock %}

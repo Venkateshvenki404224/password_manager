@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+
+<div class="shadow p-3 mb-5 bg-body rounded" id="login">
+    <center><i class="fa-solid fa-arrow-right-to-bracket fa-2xl " id="logo"></i></center>
+    <form method="POST">
+      <div class="form-group">
+        <label for="otp">OTP</label>
+        <input
+          type="number"
+          class="form-control"
+          id="phone_no"
+          name="phone_no"
+        />
+      </div>
+      <br />
+      <button type="submit" class="btn btn-outline-dark btn-lg">Login</button>
+    </form>
+</div>
+
+{% endblock %}

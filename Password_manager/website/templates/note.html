@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+    <br><br/>
+<div class="shadow p-3 mb-5 bg-body rounded">
+        <h2>{{ note_id.title }}</h2>
+        Created on : {{ note_id.date }}<br><br/>
+        <h6>{{ note_id.data }}</h6><br/>
+        <a href="/notes" class="btn btn-outline-dark btn-sm" id="edit" >Back</a>
+        <a href="/notes/edit/{{ note_id.id }}" class="btn btn-outline-dark btn-sm" id="edit" >Edit</a>
+        <a href="/notes/delete/{{ note_id.id }}" class="btn btn-outline-danger btn-sm" id="delete" >Delete</a>
+</div>
+<br/>
+{% endblock %}

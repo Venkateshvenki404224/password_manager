@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block title %}Add Password{% endblock %} {% block content
+%}
+    <div class="container text-center" id="add">
+      <div class="row">
+        <div class="col">
+      <h1>Check if your password is in a data breach</h1>
+            <p>Pwned Passwords are hundreds of millions of real world passwords previously exposed in data breaches. This exposure makes them unsuitable for ongoing use as they're at much greater risk of being used to take over other accounts. They're searchable online below as well as being downloadable for use in other online systems. Read more about how HIBP protects the privacy of searched passwords.</p>
+        </div>
+      </div>
+    </div>
+    <br>
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form method="POST">
+        <br />
+        <div class="form-group">
+        <i class="fa-solid fa-key"></i>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          data-toggle="password"
+          data-placement="before"
+          placeholder="Enter password"
+        />
+      </div>
+      <br>
+        <div>
+      <button type="submit" class="btn btn-outline-dark btn-lg" onclick="check()">Check</button>
+        </div>
+    </form>
+</div>
+<div class="container" id="test1">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <h2>622</h2><br>
+          <p>Hacked websites</p>
+        </div>
+        <div class="col">
+         <h2>11,895,990,533</h2><br>
+         <p>Hacked accounts</p>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
