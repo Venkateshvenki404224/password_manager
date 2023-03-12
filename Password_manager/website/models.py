@@ -29,5 +29,5 @@ class User(db.Model, UserMixin):
     phone_no = db.Column(db.String(16), unique=True)
     notes = db.relationship('Note')
     pass_list = db.relationship('PassList')
-    def two_factor_enabled(self):
-        return self.phone_no is not None
+    # def two_factor_enabled(self):
+    #     return self.phone_no is not None

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, session
 from flask_login import login_required, current_user, login_user
-from .auth import get_otp, check_otp
+# from .auth import get_otp, check_otp
 from .models import Note, User
 from . import db
 from .models import PassList
@@ -10,7 +10,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, ValidationError
 from wtforms.widgets import TextArea
-import phonenumbers
+# import phonenumbers
 
 views = Blueprint('views', __name__)
 

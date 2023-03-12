@@ -3,14 +3,9 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
-from twilio.rest import Client, TwilioException
-from .config import account_sid,auth_token,TWILIO_VERIFY_SERVICE_ID
 
 auth = Blueprint('auth', __name__)
-sid = account_sid
-authtoken = auth_token
-service_id = TWILIO_VERIFY_SERVICE_ID
-client = Client(sid, authtoken)
+
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -20,16 +15,8 @@ def login():
         password = request.form.get('password')
         user = User.query.filter_by(email=email).first()
         if user:
-            if check_password_hash(user.password, password):
-                if user.two_factor_enabled():
-                    get_otp(user.phone_no)
-                    session['username'] = user.email
-                    session['phone'] = user.phone_no
-                    return redirect(url_for('views.verify_2fa'))
-                login_user(user, remember=True)
-                return redirect(url_for('views.home'))
-            else:
-                flash('Incorrect password, try again.', category='error')
+            login_user(user, remember=True)
+            return redirect(url_for('views.home'))
         else:
             flash('Email does not exist.', category='error')
 
@@ -78,28 +65,28 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
-def get_otp(phone):
-    try:
-        verification = client.verify \
-            .v2 \
-            .services(service_id) \
-            .verifications \
-            .create(to=phone, channel='sms')
-    except TwilioException:
-        verification = client.verify \
-            .v2 \
-            .services(service_id) \
-            .verifications \
-            .create(to=phone, channel='call')
+# def get_otp(phone):
+#     try:
+#         verification = client.verify \
+#             .v2 \
+#             .services(service_id) \
+#             .verifications \
+#             .create(to=phone, channel='sms')
+#     except TwilioException:
+#         verification = client.verify \
+#             .v2 \
+#             .services(service_id) \
+#             .verifications \
+#             .create(to=phone, channel='call')
 
 
-def check_otp(phone, token):
-    try:
-        verification_check = client.verify \
-            .v2 \
-            .services(service_id) \
-            .verification_checks \
-            .create(to=phone, code=token)
-    except TwilioException:
-        return False
-    return verification_check.status == 'approved'
+# def check_otp(phone, token):
+#     try:
+#         verification_check = client.verify \
+#             .v2 \
+#             .services(service_id) \
+#             .verification_checks \
+#             .create(to=phone, code=token)
+#     except TwilioException:
+#         return False
+#     return verification_check.status == 'approved'
