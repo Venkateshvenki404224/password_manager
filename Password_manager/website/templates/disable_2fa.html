@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Disable Two-Factor Authentication</h1>
+  <p>
+    To disable two-factor authentication, click the button below.
+  </p>
+
+  <form method="POST" action="{{ url_for('views.disable_2fa') }}">
+    {{ form.csrf_token }}
+    {{ form.submit(class='btn btn-danger') }}
+  </form>
+{% endblock %}

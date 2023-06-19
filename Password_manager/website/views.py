@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, session
 from flask_login import login_required, current_user, login_user
-# from .auth import get_otp, check_otp
+from .auth import get_otp, check_otp
 from .models import Note, User
 from . import db
 from .models import PassList
@@ -10,7 +10,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, ValidationError
 from wtforms.widgets import TextArea
-# import phonenumbers
+from twilio.rest import Client
+import phonenumbers
 
 views = Blueprint('views', __name__)
 
@@ -179,18 +180,21 @@ def check():
         url = "https://api.pwnedpasswords.com/range/" + sha_prefix
         payload = {}
         headers = {}
-        responce = requests.request("GET", url, headers=headers, data=payload)
-        pwnd_dict = {}
-        pwnd_list = responce.text.split("\r\n")
+        response = requests.request("GET", url, headers=headers, data=payload)
+        pwnd_list = response.text.split("\r\n")
+
         for pwnd_pass in pwnd_list:
             pwnd_hash = pwnd_pass.split(":")
-            pwnd_dict[pwnd_hash[0]] = pwnd_hash[2]
+            if len(pwnd_hash) >= 2:
+                if sha_postfix == pwnd_hash[0]:
+                    count = pwnd_hash[1]
+                    flash(f"Your password has been found {count} times", category='error')
+                    return redirect(url_for('views.check'))
+        
+        flash("Your password is safe!", category='success')
 
-        if sha_postfix in pwnd_dict.keys():
-            flash(f"Your password have been found {pwnd_dict[sha_postfix]} times", category='error')
-        else:
-            flash("You password is safe!", category='success')
     return render_template("check.html", user=current_user)
+
 
 
 # @views.route('/delete', methods=['POST'])
@@ -289,31 +293,20 @@ def verify_2fa():
 
 class Disable2faForm(FlaskForm):
     submit = SubmitField('Disable 2FA')
+    
+from flask_login import current_user, login_required
 
-# account_sid = 'AC7b95626d9c0425256da8a60c0397b84f'
-# auth_token = 'fd9e1a2515c83fa94b68826213fdd435'
-# client = Client(account_sid, auth_token)
-#
-# @views.route('/otp',methods=['GET', 'POST'])
-# @login_required
-# def sendotp():
-#     if request.method == "POST":
-#         code = request.form.get('password')
-#         verification = client.verify \
-#                          .v2 \
-#                          .services('VA625923c6e9316be176a7075a28190c38') \
-#                          .verifications \
-#                          .create(to='+918073088890', channel='sms')
-#     return render_template("enable2fa.html",user=current_user)
-#
-#
-# @views.route('/verify')
-# @login_required
-# def verify(code):
-#     if request.method == "POST":
-#         verification_check = client.verify \
-#                                .v2 \
-#                                .services('VA625923c6e9316be176a7075a28190c38') \
-#                                .verification_checks \
-#                                .create(to='+918073088890', code=code)
-#     return render_template("enable2fa.html",user=current_user)
+class Disable2faForm(FlaskForm):
+    submit = SubmitField('Disable 2FA')
+
+@views.route('/disable_2fa', methods=['GET', 'POST'])
+@login_required
+def disable_2fa():
+    form = Disable2faForm()
+    if form.validate_on_submit():
+        current_user.phone_no = None
+        db.session.commit()
+        flash('Two-factor authentication has been disabled', category='success')
+        return redirect(url_for('views.home'))
+    return render_template('home.html', form=form, user=current_user)
+

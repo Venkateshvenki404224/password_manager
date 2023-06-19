@@ -23,7 +23,7 @@
     {% if not user.two_factor_enabled() %}
     <p><a href="/enable_2fa">Enable two-factor authentication</a></p>
     {% else %}
-    <p><a href="#">Disable two-factor authentication</a></p>
+    <p><a href="/disable_2fa">Disable two-factor authentication</a></p>
     {% endif %}
   </div>
 </div>

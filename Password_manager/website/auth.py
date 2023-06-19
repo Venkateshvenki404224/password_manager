@@ -3,10 +3,14 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
+from twilio.rest import Client
 
 auth = Blueprint('auth', __name__)
 
-
+sid = 'AC7b95626d9c0425256da8a60c0397b84f'
+authtoken = '19b8ab7999e742759b986ce9c0fb794a'
+service_id = 'VAb1d570c49af8d891adeae6f2b8f987d9'
+client = Client(sid, authtoken)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -65,28 +69,28 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
-# def get_otp(phone):
-#     try:
-#         verification = client.verify \
-#             .v2 \
-#             .services(service_id) \
-#             .verifications \
-#             .create(to=phone, channel='sms')
-#     except TwilioException:
-#         verification = client.verify \
-#             .v2 \
-#             .services(service_id) \
-#             .verifications \
-#             .create(to=phone, channel='call')
+def get_otp(phone):
+    try:
+        verification = client.verify \
+            .v2 \
+            .services(service_id) \
+            .verifications \
+            .create(to=phone, channel='sms')
+    except TwilioException:
+        verification = client.verify \
+            .v2 \
+            .services(service_id) \
+            .verifications \
+            .create(to=phone, channel='call')
 
 
-# def check_otp(phone, token):
-#     try:
-#         verification_check = client.verify \
-#             .v2 \
-#             .services(service_id) \
-#             .verification_checks \
-#             .create(to=phone, code=token)
-#     except TwilioException:
-#         return False
-#     return verification_check.status == 'approved'
+def check_otp(phone, token):
+    try:
+        verification_check = client.verify \
+            .v2 \
+            .services(service_id) \
+            .verification_checks \
+            .create(to=phone, code=token)
+    except TwilioException:
+        return False
+    return verification_check.status == 'approved'
